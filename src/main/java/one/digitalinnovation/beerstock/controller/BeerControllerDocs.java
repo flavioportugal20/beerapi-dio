@@ -5,14 +5,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import one.digitalinnovation.beerstock.dto.BeerDTO;
-import one.digitalinnovation.beerstock.dto.QuantityDTO;
 import one.digitalinnovation.beerstock.exception.BeerAlreadyRegisteredException;
-import one.digitalinnovation.beerstock.exception.BeerNotFoundException;
-import one.digitalinnovation.beerstock.exception.BeerStockExceededException;
+import one.digitalinnovation.beerstock.exception.BeerObjectNotFoundException;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Api("Manages beer stock")
@@ -30,7 +26,7 @@ public interface BeerControllerDocs {
             @ApiResponse(code = 200, message = "Success beer found in the system"),
             @ApiResponse(code = 404, message = "Beer with given name not found.")
     })
-    BeerDTO findByName(@PathVariable String name) throws BeerNotFoundException;
+    BeerDTO findByName(@PathVariable String name) throws BeerObjectNotFoundException;
 
     @ApiOperation(value = "Returns a list of all beers registered in the system")
     @ApiResponses(value = {
@@ -43,5 +39,5 @@ public interface BeerControllerDocs {
             @ApiResponse(code = 204, message = "Success beer deleted in the system"),
             @ApiResponse(code = 404, message = "Beer with given id not found.")
     })
-    void deleteById(@PathVariable Long id) throws BeerNotFoundException;
+    void deleteById(@PathVariable Long id) throws BeerObjectNotFoundException;
 }
